@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class GameManager {
 
-    int pos;
+    int pos, tamanhoTabuleiro;
+
 
     public GameManager() {
 
@@ -76,6 +77,7 @@ public class GameManager {
 
         int numJog = playersInfo.length;
         int numTarzan = 0;
+        tamanhoTabuleiro = jungleSize;
 
 
         for (int i = 0; i < playersInfo.length; i++) {
@@ -144,6 +146,11 @@ public class GameManager {
         String str = "";
         String[] squareInfo = new String[3];
 
+
+        if(squareNr < 1 || squareNr > tamanhoTabuleiro){
+            return null;
+        }
+
         for (int i = 0; i < listaJog.size(); i++) {
 
             Player p = listaJog.get(i);
@@ -158,9 +165,16 @@ public class GameManager {
             str += jogador + ",";
         }
 
-        squareInfo[0] = "blank.png";
-        squareInfo[1] = "vazio";
-        squareInfo[2] = str;
+        if(squareNr == tamanhoTabuleiro){
+            squareInfo[0] = "finish.png";
+            squareInfo[1] = "Meta";
+            squareInfo[2] = str;
+        }else{
+            squareInfo[0] = "blank.png";
+            squareInfo[1] = "vazio";
+            squareInfo[2] = str;
+        }
+
 
         return squareInfo;
     }
@@ -187,8 +201,6 @@ public class GameManager {
 
         return input;
     }
-
-
 
 
 
