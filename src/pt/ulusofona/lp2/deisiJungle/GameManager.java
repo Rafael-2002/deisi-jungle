@@ -223,6 +223,6 @@ public class GameManager {
 
         return "professional wrestler";
     }
-
+    // O rafa e um panilas
 
 }
