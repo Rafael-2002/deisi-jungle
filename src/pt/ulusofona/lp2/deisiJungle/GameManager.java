@@ -131,7 +131,7 @@ public class GameManager {
             String especie = playersInfo[i][2];
 
             listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
-            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
+            listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
         }
 
         energia = initialEnergy;
@@ -159,6 +159,7 @@ public class GameManager {
             Player p = jogPos.get(x);
 
             array[x] = p.id;
+
 
         }
 
@@ -236,7 +237,20 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
-        return new String[0][];
+        ArrayList<Player> jogPos = new ArrayList<>();
+        String [][] infoPlayers = new String[listaJog.size()][3];
+
+        for (int i = 0; i < listaJog.size(); i++) {
+            Player p = listaJog.get(i);
+            
+            infoPlayers[i][0] = String.valueOf(p.id);
+            infoPlayers[i][1] = p.nome;
+            infoPlayers[i][2] = p.especie;
+            infoPlayers[i][3] = String.valueOf(p.energia);
+
+        }
+
+        return infoPlayers;
     }
 
 
