@@ -80,18 +80,31 @@ public class GameManager {
             }
         }
         //verifica se as especies estao dentro da getSpecies
+        int check1 = 0,check2 = 0,check3 = 0, check4 = 0;
         for(int i = 0; i < playersInfo.length; i++){
 
-            if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0])
-                    && !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
-                return false;
+            if(playersInfo[i][2].equals(especies[0][0])){
+                check1 = 1;
             }
-
+            if(playersInfo[i][2].equals(especies[1][0])){
+                check2 = 1;
+            }
+            if(playersInfo[i][2].equals(especies[2][0])){
+                check3 = 1;
+            }
+            if(playersInfo[i][2].equals(especies[3][0])){
+                check4 = 1;
+            }
             if(playersInfo[i][2] == null){
 
                 return false;
             }
         }
+
+        if(check1 != 1 || check2 != 1 || check3 != 1 || check4 != 1){
+            return false;
+        }
+
         //verifica o numero de jogadores
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
@@ -235,7 +248,7 @@ public class GameManager {
 
         if(bypassValidations){
             pos += nrSquares;
-            energia -= nrSquares;
+            energia -= 2;
             return true;
         }else{
             if(nrSquares < 1 || nrSquares > 6){
@@ -243,7 +256,7 @@ public class GameManager {
             }
         }
         pos += nrSquares;
-        energia -= nrSquares;
+        energia -= 2;
         return true;
     }
 
