@@ -79,9 +79,7 @@ public class GameManager {
                 return false;
             }
         }
-
         //verifica se as especies estao dentro da getSpecies
-
         for(int i = 0; i < playersInfo.length; i++){
 
             if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0])
@@ -94,21 +92,16 @@ public class GameManager {
                 return false;
             }
         }
-
         //verifica o numero de jogadores
-
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
         }
-
         //verifica se o mapa tem 2 posicoes para cada jogador
 
         if(jungleSize < playersInfo.length * 2){
             return false;
         }
-
         //verifica se existem mais do que um tarzan
-
         int numTarzan = 0;
 
         for(int i = 0; i < playersInfo.length; i++){
