@@ -9,9 +9,6 @@ import java.util.Objects;
 
 public class GameManager {
 
-    int pos, tamanhoTabuleiro;
-
-
     public GameManager() {
 
     }
@@ -19,34 +16,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-
-    public int posJogador(int nrSquares) {
-        pos += nrSquares;
-        return pos;
-    }
-
-
-    public void players(String[][] playersInfo, int nrSquares) {
-
-        for (int i = 0; i < playersInfo.length; i++) {
-
-            int id = 0;
-            String nome = null;
-            String especie = null;
-            int energia = 0;
-
-            playersInfo[i][0] = String.valueOf(id);
-            playersInfo[i][1] = nome;
-            playersInfo[i][2] = especie;
-            playersInfo[i][3] = String.valueOf(energia);
-
-            listaJog.add(new Player(id, nome, especie, energia, posJogador(nrSquares)));
-            listaJogSpos.add(new Player(id, nome, especie, energia));
-
-        }
-
-
-    }
+    int pos, tamanhoTabuleiro,energia;
 
 
     public String[][] getSpecies() {
@@ -129,6 +99,21 @@ public class GameManager {
             if(Objects.equals(playersInfo[i][2], "Z")) numTarzan++;
         }
         if(numTarzan > 1) return false;
+
+
+        //criar os jogadores
+
+        for(int i = 0; i < playersInfo.length; i++) {
+
+            int id = Integer.parseInt(playersInfo[i][0]);
+            String nome = playersInfo[i][1];
+            String especie = playersInfo[i][2];
+
+            listaJog.add(new Player(id, nome, especie, initialEnergy, pos));
+            listaJog.add(new Player(id, nome, especie, initialEnergy));
+        }
+
+        energia = initialEnergy;
 
         return true;
     }
@@ -237,15 +222,16 @@ public class GameManager {
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
         if(bypassValidations){
+            pos += nrSquares;
+            energia -= nrSquares;
             return true;
         }else{
             if(nrSquares < 1 || nrSquares > 6){
                 return false;
             }
         }
-
-        posJogador(nrSquares);
-
+        pos += nrSquares;
+        energia -= nrSquares;
         return true;
     }
 
@@ -271,7 +257,7 @@ public class GameManager {
 
     public String whoIsTaborda() {
 
-        return "Professional wrestler";
+        return "Portuguese professional wrestler";
     }
 
 }
