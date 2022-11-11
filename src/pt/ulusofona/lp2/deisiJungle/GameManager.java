@@ -143,9 +143,13 @@ public class GameManager {
 
         ArrayList<Player> jogPos = new ArrayList<>();
 
+        if(squareNr < 1 || squareNr > tamanhoTabuleiro){
+            return new int[0];
+        }
+
         for (int i = 0; i < listaJog.size(); i++) {
 
-            Player p = listaJog.get(i);
+             Player p = listaJog.get(i);
 
             if (p.pos == squareNr) {
                 jogPos.add(p);
@@ -153,14 +157,13 @@ public class GameManager {
 
         }
 
+
         int[] array = new int[jogPos.size()];
 
         for (int x = 0; x < jogPos.size(); x++) {
             Player p = jogPos.get(x);
 
             array[x] = p.id;
-
-
         }
 
         return array;
