@@ -91,6 +91,10 @@ public class GameManager {
                 }
             }
 
+            if(playersInfo[i][0] == null){
+                return false;
+            }
+
             if(numRep > 1){
                 return false;
             }
