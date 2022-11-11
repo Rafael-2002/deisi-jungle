@@ -96,8 +96,6 @@ public class GameManager {
                     return false;
                 }
             }
-
-
             if(playersInfo[i][2] == null){
 
                 return false;
