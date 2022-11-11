@@ -95,7 +95,7 @@ public class GameManager {
                 return false;
             }
 
-            if(numRep > 1){
+            if(numRep >= 2){
                 return false;
             }
 
@@ -104,10 +104,10 @@ public class GameManager {
             }
 
 
-                if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0]) &&
-                        !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
-                    return false;
-                }
+            if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0]) &&
+                    !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
+                return false;
+            }
 
 
             if (Objects.equals(playersInfo[i][2], "Z")) {
@@ -115,7 +115,7 @@ public class GameManager {
             }
         }
 
-        if (numTarzan > 1) {
+        if (numTarzan >= 2) {
             return false;
         }
 
@@ -123,7 +123,7 @@ public class GameManager {
             return false;
         }
 
-        if(jungleSize <= numJog * 2){
+        if(jungleSize < numJog * 2){
             return false;
         }
 
