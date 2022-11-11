@@ -207,25 +207,19 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
-        ArrayList<Player> jogId = new ArrayList<>();
-        String[] str = new String[4];
+        String[] infoPlayers = new String[4];
 
-        if (!listaJogSpos.contains(playerId)) {
-            return null;
-        }
-
-        for (int i = 0; i < listaJogSpos.size(); i++) {
-
-            Player p = listaJogSpos.get(i);
-
+        for (Player p : listaJogSpos) {
             if (p.id == playerId) {
-                jogId.add(p);
+                infoPlayers[0] = String.valueOf(p.id);
+                infoPlayers[1] = p.nome;
+                infoPlayers[2] = p.especie;
+                infoPlayers[3] = String.valueOf(p.energia);
             }
         }
 
-        String[] input = listaJogSpos.toArray(new String[0]);
+        return infoPlayers;
 
-        return input;
     }
 
 
@@ -237,11 +231,10 @@ public class GameManager {
 
     public String[][] getPlayersInfo(){
 
-        ArrayList<Player> jogPos = new ArrayList<>();
         String [][] infoPlayers = new String[listaJogSpos.size()][4];
 
-        for (int i = 0; i < listaJog.size(); i++) {
-            Player p = listaJog.get(i);
+        for (int i = 0; i < listaJogSpos.size(); i++) {
+            Player p = listaJogSpos.get(i);
             
             infoPlayers[i][0] = String.valueOf(p.id);
             infoPlayers[i][1] = p.nome;
