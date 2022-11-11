@@ -79,14 +79,14 @@ public class GameManager {
         int numTarzan = 0;
         tamanhoTabuleiro = jungleSize;
 
-        Arrays.sort(playersInfo);
 
         for (int i = 0; i < playersInfo.length; i++) {
 
-            if(Objects.equals(playersInfo[i][0], playersInfo[i + 1][0])){
-                return false;
+            for(int y = 0; y < playersInfo.length; y++){
+                if(Objects.equals(playersInfo[i][0], playersInfo[y+1][0])){
+                    return false;
+                }
             }
-
 
             if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
                 return false;
