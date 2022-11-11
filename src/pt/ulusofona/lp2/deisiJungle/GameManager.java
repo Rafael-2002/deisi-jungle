@@ -127,7 +127,7 @@ public class GameManager {
 
         for(int i = 0; i < playersInfo.length; i++) {
 
-            int id = Integer.parseInt(playersInfo[i][0]);
+            String id = playersInfo[i][0];
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
 
@@ -159,7 +159,7 @@ public class GameManager {
         for (int x = 0; x < jogPos.size(); x++) {
             Player p = jogPos.get(x);
 
-            array[x] = p.id;
+            array[x] = Integer.parseInt(p.id);
 
         }
 
@@ -182,7 +182,7 @@ public class GameManager {
             Player p = listaJog.get(i);
 
             if (p.pos == squareNr) {
-                jogador.add(p.id);
+                jogador.add(Integer.valueOf(p.id));
             }
 
         }
@@ -217,8 +217,8 @@ public class GameManager {
         for (int i = 0; i < listaJogSpos.size(); i++) {
 
             Player p = listaJogSpos.get(i);
-
-            if (p.id == playerId) {
+            int id = Integer.parseInt(p.id);
+            if (id == playerId) {
                 jogId.add(p);
             }
         }
