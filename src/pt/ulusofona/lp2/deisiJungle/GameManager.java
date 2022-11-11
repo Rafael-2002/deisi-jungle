@@ -76,58 +76,59 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
-        int numJog = playersInfo.length;
-        int numTarzan = 0;
+
         tamanhoTabuleiro = jungleSize;
 
+        //verifica se existe algum utilizador com o mesmo ID e se o ID é válido
 
-        for (int i = 0; i < numJog; i++) {
+        for(int i = 0; i < playersInfo.length; i++){
 
-            int numRep = 0;
+            int playerID = Integer.parseInt(playersInfo[i][0]);
 
-            for(int y = 0; y < numJog; y++){
+            int repeteID = 0;
 
-                if(Objects.equals(playersInfo[i][0], playersInfo[y][0])){
-                    numRep++;
-                }
+            for(int x = 0; x < playersInfo.length; x++){
+
+                if(Objects.equals(playersInfo[i][0], playersInfo[x][0])) repeteID++;
+
+                if(repeteID > 1) return false;
             }
 
-            int player = Integer.parseInt(playersInfo[i][0]);
-            if(playersInfo[i][0] == null || player < 0 || playersInfo[i][2] == null){
-                return false;
-            }
+            if(playerID < 0 || playersInfo[i][0] == null) return false;
 
-            if(numRep >= 2){
-                return false;
-            }
-
-            if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
-                return false;
-            }
-
-            for(int x = 0; x < getSpecies().length;x++){
-                if(!playersInfo[i][2].equals(getSpecies()[x][0])){
-                    return false;
-                }
-            }
-
-
-            if (Objects.equals(playersInfo[i][2], "Z")) {
-                numTarzan++;
-            }
         }
 
-        if (numTarzan >= 2) {
-            return false;
+        //verifica os nomes dos jogadores
+
+        for(int i = 0; i < playersInfo.length; i++)
+            if(Objects.equals(playersInfo[i][1], "") || playersInfo[i][2] == null) return false;
+
+
+        //verifica se as especies estao dentro da getSpecies
+
+        for(int i = 0; i < playersInfo.length; i++){
+            for(int x = 0; x < playersInfo.length; x++)
+                if(!Objects.equals(playersInfo[i][2], especies[x][0])) return false;
+
+            if(playersInfo[i][2] == null) return false;
         }
 
-        if (numJog < 2 || numJog > 4) {
-            return false;
-        }
+        //verifica o numero de jogadores
 
-        if(jungleSize < numJog * 2){
-            return false;
+        if(playersInfo.length < 2 || playersInfo.length > 4) return false;
+
+        //verifica se o mapa tem 2 posicoes para cada jogador
+
+        if(jungleSize < playersInfo.length * 2) return false;
+
+        //verifica se existem mais do que um tarzan
+
+        int numTarzan = 0;
+
+        for(int i = 0; i < playersInfo.length; i++){
+            if(Objects.equals(playersInfo[i][2], "Z")) numTarzan++;
         }
+        if(numTarzan > 1) return false;
 
         return true;
     }
