@@ -9,6 +9,7 @@ public class GameManager {
 
     int pos, tamanhoTabuleiro;
 
+
     public GameManager() {
 
     }
@@ -80,29 +81,19 @@ public class GameManager {
         tamanhoTabuleiro = jungleSize;
 
 
-        for(int i = 0; i < playersInfo.length-1;i++){
-            int numIds = 0;
-            int[] ids = new int[playersInfo.length-1];
-            Player p = listaJog.get(i);
-
-            ids[i] = Integer.parseInt(playersInfo[i][0]);
-
-            for(int x = 0; x < listaJog.size();x++){
-                if(p.id == ids[i]){
-                    numIds++;
-                }
-            }
-            if(numIds != 1){
+        for (int i = 0; i < playersInfo.length; i++) {
+            if (Objects.equals(playersInfo[i][0], playersInfo)) {
                 return false;
             }
 
-            if(playersInfo[i][1] == null || playersInfo[i][1].equals("")){
+            if (playersInfo[i][1] == null || playersInfo[i][1] == "") {
                 return false;
             }
 
             if (!playersInfo[i][2].equals(getSpecies())) {
                 return false;
             }
+
             if (Objects.equals(playersInfo[i][3], "Z")) {
                 numTarzan++;
             }
@@ -180,7 +171,7 @@ public class GameManager {
             squareInfo[2] = str;
         }else{
             squareInfo[0] = "blank.png";
-            squareInfo[1] = "Vazio";
+            squareInfo[1] = "vazio";
             squareInfo[2] = str;
         }
 
