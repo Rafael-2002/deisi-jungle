@@ -127,12 +127,11 @@ public class GameManager {
 
         for(int i = 0; i < playersInfo.length; i++) {
 
-            int id = Integer.parseInt(playersInfo[i][0]);
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
 
-            listaJog.add(new Player(id, nome, especie, initialEnergy, pos));
-            listaJog.add(new Player(id, nome, especie, initialEnergy));
+            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
+            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
         }
 
         energia = initialEnergy;

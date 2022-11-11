@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import java.util.HashMap;
-
 public class Player {
 
     int id;
@@ -11,7 +9,7 @@ public class Player {
     int pos;
 
 
-    public Player(int id, String nome, String especie, int energia,int pos){
+    public Player(int id, String nome, String especie, int energia, int pos){
         this.id = id;
         this.nome = nome;
         this.especie = especie;
