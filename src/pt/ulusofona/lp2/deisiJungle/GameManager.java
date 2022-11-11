@@ -238,7 +238,7 @@ public class GameManager {
     public String[][] getPlayersInfo(){
 
         ArrayList<Player> jogPos = new ArrayList<>();
-        String [][] infoPlayers = new String[listaJog.size()][3];
+        String [][] infoPlayers = new String[listaJogSpos.size()][4];
 
         for (int i = 0; i < listaJog.size(); i++) {
             Player p = listaJog.get(i);
