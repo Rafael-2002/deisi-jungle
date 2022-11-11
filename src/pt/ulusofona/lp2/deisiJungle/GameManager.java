@@ -81,9 +81,9 @@ public class GameManager {
         tamanhoTabuleiro = jungleSize;
 
 
-        for(int i = 0; i < playersInfo.length;i++){
+        for(int i = 0; i < playersInfo.length-1;i++){
             int numIds = 0;
-            int[] ids = new int[playersInfo.length];
+            int[] ids = new int[playersInfo.length-1];
             Player p = listaJog.get(i);
 
             ids[i] = Integer.parseInt(playersInfo[i][0]);
