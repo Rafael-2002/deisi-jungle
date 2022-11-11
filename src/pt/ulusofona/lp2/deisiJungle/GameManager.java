@@ -202,6 +202,21 @@ public class GameManager {
         return input;
     }
 
+
+
+    public String[] getCurrentPlayerInfo(){
+
+        return new String[0];
+    }
+
+    public String[][] getPlayersInfo(){
+
+        return new String[0][];
+    }
+
+
+
+
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         if (nrSquares < 1 || nrSquares > 6) {
             if (bypassValidations) {
