@@ -171,7 +171,7 @@ public class GameManager {
             squareInfo[2] = str;
         }else{
             squareInfo[0] = "blank.png";
-            squareInfo[1] = "vazio";
+            squareInfo[1] = "Vazio";
             squareInfo[2] = str;
         }
 
@@ -251,7 +251,7 @@ public class GameManager {
 
     public String whoIsTaborda() {
 
-        return "Professional Wrestler";
+        return "Professional wrestler";
     }
 
 }
