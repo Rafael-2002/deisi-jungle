@@ -77,7 +77,7 @@ public class GameManager {
 
         for(int i = 0; i < playersInfo.length; i++){
 
-            if(Objects.equals(playersInfo[i][1], "") || playersInfo[i][2] == null){
+            if(Objects.equals(playersInfo[i][1], "") || playersInfo[i][1] == null){
                 return false;
             }
         }
