@@ -80,11 +80,11 @@ public class GameManager {
         tamanhoTabuleiro = jungleSize;
 
 
-        for (int i = 0; i < playersInfo.length; i++) {
+        for (int i = 0; i < numJog; i++) {
 
             int numRep = 0;
 
-            for(int y = 0; y < playersInfo.length; y++){
+            for(int y = 0; y < numJog; y++){
 
                 if(Objects.equals(playersInfo[i][0], playersInfo[y][0])){
                     numRep++;
@@ -99,11 +99,12 @@ public class GameManager {
                 return false;
             }
 
-            for(int x = 0; x < especies.length-1; x++){
-                if(Objects.equals(playersInfo[i][2], especies[x][0])){
+
+                if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0]) &&
+                        !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
                     return false;
                 }
-            }
+
 
             if (Objects.equals(playersInfo[i][2], "Z")) {
                 numTarzan++;
@@ -118,7 +119,11 @@ public class GameManager {
             return false;
         }
 
-        return jungleSize >= numJog * 2;
+        if(jungleSize <= numJog * 2){
+            return false;
+        }
+
+        return true;
     }
 
     public int[] getPlayerIds(int squareNr) {
