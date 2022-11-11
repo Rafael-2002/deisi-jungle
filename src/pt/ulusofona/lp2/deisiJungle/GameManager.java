@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ public class GameManager {
 
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
-
+    String[][] especies = new String[5][3];
 
     public int posJogador(int nrSquares) {
         pos += nrSquares;
@@ -49,8 +50,6 @@ public class GameManager {
 
     public String[][] getSpecies() {
 
-        String[][] especies = new String[5][3];
-
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
         especies[0][2] = "Elefante.png";
@@ -80,18 +79,23 @@ public class GameManager {
         int numTarzan = 0;
         tamanhoTabuleiro = jungleSize;
 
+        Arrays.sort(playersInfo);
 
         for (int i = 0; i < playersInfo.length; i++) {
-            if (Objects.equals(playersInfo[i][0], playersInfo)) {
+
+            if(Objects.equals(playersInfo[i][0], playersInfo[i + 1][0])){
                 return false;
             }
 
-            if (playersInfo[i][1] == null || playersInfo[i][1] == "") {
+
+            if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
                 return false;
             }
 
-            if (!playersInfo[i][2].equals(getSpecies())) {
-                return false;
+            for(int x = 0; x < especies.length-1; x++){
+                if(Objects.equals(playersInfo[i][2], especies[x][0])){
+                    return false;
+                }
             }
 
             if (Objects.equals(playersInfo[i][3], "Z")) {
@@ -107,11 +111,7 @@ public class GameManager {
             return false;
         }
 
-        if (jungleSize < numJog * 2) {
-            return false;
-        }
-
-        return true;
+        return jungleSize >= numJog * 2;
     }
 
     public int[] getPlayerIds(int squareNr) {
