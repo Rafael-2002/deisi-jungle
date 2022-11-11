@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -139,7 +140,6 @@ public class GameManager {
         return array;
     }
 
-
     public String[] getSquareInfo(int squareNr) {
 
         ArrayList<Integer> jogador = new ArrayList<>();
@@ -202,8 +202,6 @@ public class GameManager {
         return input;
     }
 
-
-
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         if (nrSquares < 1 || nrSquares > 6) {
             if (bypassValidations) {
@@ -219,10 +217,28 @@ public class GameManager {
     }
 
 
+
+
+    public String[] getWinnerInfo(){
+
+        return new String[0];
+    }
+
+    public ArrayList<String> getGameResults(){
+
+        return null;
+    }
+
+    public JPanel getAuthorsPanel(){
+
+        return null;
+    }
+
+
+
     public String whoIsTaborda() {
 
         return "professional wrestler";
     }
-    // O rafa e um panilas
 
 }
