@@ -8,7 +8,7 @@ import java.util.Objects;
 public class GameManager {
 
     int pos, tamanhoTabuleiro;
-
+    String[][] especies = new String[5][3];
 
     public GameManager() {
 
@@ -49,7 +49,7 @@ public class GameManager {
 
     public String[][] getSpecies() {
 
-        String[][] especies = new String[5][3];
+
 
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
@@ -81,22 +81,36 @@ public class GameManager {
         tamanhoTabuleiro = jungleSize;
 
 
-        for (int i = 0; i < playersInfo.length; i++) {
-            if (Objects.equals(playersInfo[i][0], playersInfo)) {
+        for(int i = 0; i < playersInfo.length;i++){
+            int numIds = 0;
+            int[] ids = new int[playersInfo.length];
+            Player p = listaJog.get(i);
+
+            ids[i] = Integer.parseInt(playersInfo[i][0]);
+
+            for(int x = 0; x < listaJog.size();x++){
+                if(p.id == ids[i]){
+                    numIds++;
+                }
+            }
+            if(numIds != 1){
                 return false;
             }
 
-            if (playersInfo[i][1] == null || playersInfo[i][1] == "") {
+            if(playersInfo[i][1] == null || playersInfo[i][1].equals("")){
                 return false;
             }
 
-            if (!playersInfo[i][2].equals(getSpecies())) {
+            if(!playersInfo[i][2].equals(especies[i][0])){
                 return false;
             }
 
-            if (Objects.equals(playersInfo[i][3], "Z")) {
+            if(Objects.equals(especies[i][0], "Z")){
                 numTarzan++;
             }
+
+
+
         }
 
         if (numTarzan > 1) {
@@ -171,7 +185,7 @@ public class GameManager {
             squareInfo[2] = str;
         }else{
             squareInfo[0] = "blank.png";
-            squareInfo[1] = "vazio";
+            squareInfo[1] = "Vazio";
             squareInfo[2] = str;
         }
 
@@ -253,7 +267,7 @@ public class GameManager {
 
     public String whoIsTaborda() {
 
-        return "professional wrestler";
+        return "Professional Wrestler";
     }
 
 }
