@@ -223,14 +223,15 @@ public class GameManager {
 
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-        if (nrSquares < 1 || nrSquares > 6) {
-            if (bypassValidations) {
-                posJogador(nrSquares);
 
-                return true;
+        if(bypassValidations){
+            return true;
+        }else{
+            if(nrSquares < 1 || nrSquares > 6){
+                return false;
             }
-            return false;
         }
+
         posJogador(nrSquares);
 
         return true;
