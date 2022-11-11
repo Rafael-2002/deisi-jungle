@@ -59,46 +59,75 @@ public class GameManager {
 
             for(int x = 0; x < playersInfo.length; x++){
 
-                if(Objects.equals(playersInfo[i][0], playersInfo[x][0])) repeteID++;
+                if(Objects.equals(playersInfo[i][0], playersInfo[x][0])){
+                    repeteID++;
+                }
 
-                if(repeteID > 1) return false;
+                if(repeteID > 1){
+                    return false;
+                }
             }
 
-            if(playerID < 0 || playersInfo[i][0] == null) return false;
+            if(playerID < 0 || playersInfo[i][0] == null){
+                return false;
+            }
 
         }
 
         //verifica os nomes dos jogadores
 
-        for(int i = 0; i < playersInfo.length; i++)
-            if(Objects.equals(playersInfo[i][1], "") || playersInfo[i][2] == null) return false;
+        for(int i = 0; i < playersInfo.length; i++){
+
+            if(Objects.equals(playersInfo[i][1], "") || playersInfo[i][2] == null){
+                return false;
+            }
+        }
+
 
 
         //verifica se as especies estao dentro da getSpecies
 
         for(int i = 0; i < playersInfo.length; i++){
-            for(int x = 0; x < playersInfo.length; x++)
-                if(!Objects.equals(playersInfo[i][2], especies[x][0])) return false;
 
-            if(playersInfo[i][2] == null) return false;
+            for(int x = 0; x < playersInfo.length; x++){
+
+                if(!Objects.equals(playersInfo[i][2], especies[x][0])){
+
+                    return false;
+                }
+            }
+
+
+            if(playersInfo[i][2] == null){
+
+                return false;
+            }
         }
 
         //verifica o numero de jogadores
 
-        if(playersInfo.length < 2 || playersInfo.length > 4) return false;
+        if(playersInfo.length < 2 || playersInfo.length > 4){
+            return false;
+        }
 
         //verifica se o mapa tem 2 posicoes para cada jogador
 
-        if(jungleSize < playersInfo.length * 2) return false;
+        if(jungleSize < playersInfo.length * 2){
+            return false;
+        }
 
         //verifica se existem mais do que um tarzan
 
         int numTarzan = 0;
 
         for(int i = 0; i < playersInfo.length; i++){
-            if(Objects.equals(playersInfo[i][2], "Z")) numTarzan++;
+            if(Objects.equals(playersInfo[i][2], "Z")){
+                numTarzan++;
+            }
         }
-        if(numTarzan > 1) return false;
+        if(numTarzan > 1){
+            return false;
+        }
 
 
         //criar os jogadores
