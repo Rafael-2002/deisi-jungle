@@ -208,18 +208,25 @@ public class GameManager {
     public String[] getPlayerInfo(int playerId) {
 
         String[] infoPlayers = new String[4];
+        int check = 0;
 
-        for (Player p : listaJogSpos) {
+        for (int i = 0; i < listaJogSpos.size(); i++) {
+
+            Player p = listaJogSpos.get(i);
+
             if (p.id == playerId) {
                 infoPlayers[0] = String.valueOf(p.id);
                 infoPlayers[1] = p.nome;
                 infoPlayers[2] = p.especie;
                 infoPlayers[3] = String.valueOf(p.energia);
+                check= 1;
             }
         }
-
-        return infoPlayers;
-
+        if(check == 1) {
+            return infoPlayers;
+        }else{
+            return null;
+        }
     }
 
 
