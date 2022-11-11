@@ -52,8 +52,6 @@ public class GameManager {
 
         for(int i = 0; i < playersInfo.length; i++){
 
-            int playerID = Integer.parseInt(playersInfo[i][0]);
-
             int repeteID = 0;
 
             for(int x = 0; x < playersInfo.length; x++){
@@ -67,7 +65,7 @@ public class GameManager {
                 }
             }
 
-            if(playerID < 0 || playersInfo[i][0] == null){
+            if(playersInfo[i][0] == null){
                 return false;
             }
         }
