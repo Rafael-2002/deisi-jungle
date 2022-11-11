@@ -46,7 +46,6 @@ public class GameManager {
 
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
-
         tamanhoTabuleiro = jungleSize;
 
         //verifica se existe algum utilizador com o mesmo ID e se o ID é válido
@@ -71,9 +70,7 @@ public class GameManager {
             if(playerID < 0 || playersInfo[i][0] == null){
                 return false;
             }
-
         }
-
         //verifica os nomes dos jogadores
 
         for(int i = 0; i < playersInfo.length; i++){
@@ -83,19 +80,15 @@ public class GameManager {
             }
         }
 
-
-
         //verifica se as especies estao dentro da getSpecies
 
         for(int i = 0; i < playersInfo.length; i++){
 
-            for(int x = 0; x < playersInfo.length; x++){
-
-                if(!Objects.equals(playersInfo[i][2], especies[x][0])){
-
-                    return false;
-                }
+            if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0])
+                    && !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
+                return false;
             }
+
             if(playersInfo[i][2] == null){
 
                 return false;
@@ -126,7 +119,6 @@ public class GameManager {
         if(numTarzan > 1){
             return false;
         }
-
 
         //criar os jogadores
 
