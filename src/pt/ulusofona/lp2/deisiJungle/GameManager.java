@@ -82,10 +82,17 @@ public class GameManager {
 
         for (int i = 0; i < playersInfo.length; i++) {
 
+            int numRep = 0;
+
             for(int y = 0; y < playersInfo.length; y++){
-                if(Objects.equals(playersInfo[i][0], playersInfo[y+1][0])){
-                    return false;
+
+                if(Objects.equals(playersInfo[i][0], playersInfo[y][0])){
+                    numRep++;
                 }
+            }
+
+            if(numRep > 1){
+                return false;
             }
 
             if (playersInfo[i][1] == null || Objects.equals(playersInfo[i][1], "")) {
