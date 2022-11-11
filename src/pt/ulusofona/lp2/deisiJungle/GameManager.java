@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
+
 public class GameManager {
 
     int pos, tamanhoTabuleiro;
@@ -91,7 +92,8 @@ public class GameManager {
                 }
             }
 
-            if(playersInfo[i][0] == null){
+            int player = Integer.parseInt(playersInfo[i][0]);
+            if(playersInfo[i][0] == null || player < 0 || playersInfo[i][2] == null){
                 return false;
             }
 
@@ -103,10 +105,10 @@ public class GameManager {
                 return false;
             }
 
-
-            if(!Objects.equals(playersInfo[i][2], especies[0][0]) && !Objects.equals(playersInfo[i][2], especies[1][0]) && !Objects.equals(playersInfo[i][2], especies[2][0]) &&
-                    !Objects.equals(playersInfo[i][2], especies[3][0]) && !Objects.equals(playersInfo[i][2], especies[4][0]) ){
-                return false;
+            for(int x = 0; x < getSpecies().length;x++){
+                if(!playersInfo[i][2].equals(getSpecies()[x][0])){
+                    return false;
+                }
             }
 
 
