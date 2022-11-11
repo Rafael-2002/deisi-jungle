@@ -8,7 +8,6 @@ import java.util.Objects;
 public class GameManager {
 
     int pos, tamanhoTabuleiro;
-    String[][] especies = new String[5][3];
 
     public GameManager() {
 
@@ -49,7 +48,7 @@ public class GameManager {
 
     public String[][] getSpecies() {
 
-
+        String[][] especies = new String[5][3];
 
         especies[0][0] = "E";
         especies[0][1] = "Elefante";
@@ -101,16 +100,12 @@ public class GameManager {
                 return false;
             }
 
-            if(!playersInfo[i][2].equals(especies[i][0])){
+            if (!playersInfo[i][2].equals(getSpecies())) {
                 return false;
             }
-
-            if(Objects.equals(especies[i][0], "Z")){
+            if (Objects.equals(playersInfo[i][3], "Z")) {
                 numTarzan++;
             }
-
-
-
         }
 
         if (numTarzan > 1) {
