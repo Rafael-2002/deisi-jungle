@@ -71,6 +71,8 @@ public class GameManager {
                 return false;
             }
         }
+
+
         //verifica os nomes dos jogadores
 
         for(int i = 0; i < playersInfo.length; i++){
@@ -79,21 +81,15 @@ public class GameManager {
                 return false;
             }
         }
-        //verifica se as especies estao dentro da getSpecies
-        int check1 = 0,check2 = 0,check3 = 0, check4 = 0;
-        for(int i = 0; i < playersInfo.length; i++){
 
-            if(playersInfo[i][2].equals(especies[0][0])){
-                check1 = 1;
-            }
-            if(playersInfo[i][2].equals(especies[1][0])){
-                check2 = 1;
-            }
-            if(playersInfo[i][2].equals(especies[2][0])){
-                check3 = 1;
-            }
-            if(playersInfo[i][2].equals(especies[3][0])){
-                check4 = 1;
+
+        //verifica se as especies estao dentro da getSpecies
+        boolean[] check = new boolean[playersInfo.length];
+        for(int i = 0; i < playersInfo.length; i++){
+            for(int x = 0; x < especies.length; x++){
+                if(playersInfo[i][2].equals(getSpecies()[x][0])){
+                    check[i] = true;
+                }
             }
             if(playersInfo[i][2] == null){
 
@@ -101,19 +97,22 @@ public class GameManager {
             }
         }
 
-        if(check1 != 1 || check2 != 1 || check3 != 1 || check4 != 1){
-            return false;
+        for(int checkEspecies = 0; checkEspecies < check.length; checkEspecies++){
+            if(!check[checkEspecies]){
+                return false;
+            }
         }
-
         //verifica o numero de jogadores
         if(playersInfo.length < 2 || playersInfo.length > 4){
             return false;
         }
+
         //verifica se o mapa tem 2 posicoes para cada jogador
 
         if(jungleSize < playersInfo.length * 2){
             return false;
         }
+
         //verifica se existem mais do que um tarzan
         int numTarzan = 0;
 
