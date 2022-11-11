@@ -105,7 +105,7 @@ public class GameManager {
                 }
             }
 
-            if (Objects.equals(playersInfo[i][3], "Z")) {
+            if (Objects.equals(playersInfo[i][2], "Z")) {
                 numTarzan++;
             }
         }
