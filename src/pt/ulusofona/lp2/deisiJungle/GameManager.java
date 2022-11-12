@@ -14,7 +14,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
 
     String[][] especies = new String[5][3];
-    int pos = 1, tamanhoTabuleiro, energia, nTurno;
+    int tamanhoTabuleiro, energia, nTurno;
     int[] ordemTurnos;
 
 
@@ -43,7 +43,7 @@ public class GameManager {
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
 
-            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
+            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, 1));
 
         }
 
@@ -318,11 +318,14 @@ public class GameManager {
 
         ArrayList<Player> jogadores = new ArrayList<>();
 
+        int pos = 1;
+
 
         for(int i = 0; i < listaJog.size();i++){
             Player p = listaJog.get(i);
             if(p.id == ordemTurnos[nTurno]){
                 jogadores.add(p);
+                pos = p.pos;
             }
         }
 
@@ -371,7 +374,7 @@ public class GameManager {
 
                 }
             }
-
+        nTurno++;
         return true;
 
         }
