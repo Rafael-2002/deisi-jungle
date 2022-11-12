@@ -198,9 +198,11 @@ public class GameManager {
         String[] squareInfo = new String[3];
         String str = "";
 
-        if(squareNr < 1 || squareNr > tamanhoTabuleiro){
+        if(squareNr < 1 || squareNr > tamanhoTabuleiro || squareNr == 0){
             return null;
         }
+
+
 
         for(int i = 0; i < listaJog.size(); i++){
 
