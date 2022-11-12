@@ -246,10 +246,12 @@ public class GameManager {
 
             if (p.id == playerId) {
                 jogPos.add(p);
-            } else {
-                return null;
             }
 
+        }
+
+        if(jogPos.size() == 0){
+            return null;
         }
 
         for (int x = 0; x < jogPos.size(); x++) {
