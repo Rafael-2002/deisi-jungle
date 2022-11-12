@@ -169,27 +169,31 @@ public class GameManager {
 
     public String[] getSquareInfo(int squareNr) {
 
-        ArrayList<Integer> jogador = new ArrayList<>();
-        String str = "";
+        ArrayList<Player> jogPos = new ArrayList<>();
         String[] squareInfo = new String[3];
-
+        String str = "";
 
         if(squareNr < 1 || squareNr > tamanhoTabuleiro){
             return null;
         }
 
-        for (int i = 0; i < listaJog.size(); i++) {
+        for(int i = 0; i < listaJog.size(); i++){
 
             Player p = listaJog.get(i);
 
-            if (p.pos == squareNr) {
-                jogador.add(p.id);
+            if(p.pos == squareNr){
+                jogPos.add(p);
             }
-
         }
 
-        for (int x = 0; x < jogador.size(); x++) {
-            str += jogador + ",";
+        for(int x = 0; x < jogPos.size(); x++){
+            Player p = jogPos.get(x);
+
+            if(x == jogPos.size()-1){
+                str += p.id;
+            }else{
+                str += p.id + ",";
+            }
         }
 
         if(squareNr == tamanhoTabuleiro){
@@ -201,7 +205,6 @@ public class GameManager {
             squareInfo[1] = "Vazio";
             squareInfo[2] = str;
         }
-
 
         return squareInfo;
     }
