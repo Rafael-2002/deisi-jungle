@@ -105,9 +105,7 @@ public class GameManager {
 
             int repeteID = 0;
 
-            if(!playersInfo[i][0].matches("^[0-9]*$") || playersInfo[i][0] == null){
-                return false;
-            }
+
 
             for(int x = 0; x < playersInfo.length; x++){
 
