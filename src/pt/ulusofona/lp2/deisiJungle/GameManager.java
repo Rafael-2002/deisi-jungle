@@ -17,7 +17,34 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-    int pos = 1, tamanhoTabuleiro,energia;
+    int pos = 1, tamanhoTabuleiro,energia,turnoID,Nturno;
+
+    int[] idsOrdenados = new int[listaJog.size()];
+
+    public void turnos(String[][] playersInfo){
+
+        for(int i = 0; i < playersInfo.length; i++){
+
+            idsOrdenados[i] = Integer.parseInt(playersInfo[i][0]);
+        }
+
+        Arrays.sort(idsOrdenados);
+
+        turnoID = idsOrdenados[0];
+        Nturno = 0;
+    }
+
+    public void trocarTurno(){
+            if(turnoID == idsOrdenados[idsOrdenados.length-1]){
+                turnoID = idsOrdenados[0];
+                Nturno = 0;
+                return;
+
+        }
+
+        turnoID = idsOrdenados[Nturno+1];
+        Nturno++;
+    }
 
 
     public void criarPlayers(String [][] playersInfo,int initialEnergy){
@@ -148,6 +175,8 @@ public class GameManager {
 
         //criar os jogadores
         criarPlayers(playersInfo,initialEnergy);
+        //criar turnos
+        turnos(playersInfo);
 
 
         return true;
@@ -253,7 +282,26 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo(){
 
-        return new String[0];
+        String[] infoPlayers = new String[4];
+        int check = 0;
+
+        for (int i = 0; i < listaJogSpos.size(); i++) {
+
+            Player p = listaJogSpos.get(i);
+
+            if (p.id == turnoID) {
+                infoPlayers[0] = String.valueOf(p.id);
+                infoPlayers[1] = p.nome;
+                infoPlayers[2] = p.especie;
+                infoPlayers[3] = String.valueOf(p.energia);
+                check= 1;
+            }
+        }
+        if(check == 1) {
+            return infoPlayers;
+        }else{
+            return null;
+        }
     }
 
     public String[][] getPlayersInfo(){
@@ -283,15 +331,17 @@ public class GameManager {
         if(bypassValidations){
             pos += nrSquares;
             energia -= 2;
-
+            trocarTurno();
             return true;
         }else{
             if(nrSquares < 1 || nrSquares > 6){
+                trocarTurno();
                 return false;
             }
         }
         pos += nrSquares;
         energia -= 2;
+        trocarTurno();
         return true;
     }
 
