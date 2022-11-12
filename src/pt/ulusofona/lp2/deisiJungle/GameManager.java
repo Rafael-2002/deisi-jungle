@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,55 +18,47 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-    int pos = 1, tamanhoTabuleiro,energia,turnoID,Nturno;
+    int pos = 1, tamanhoTabuleiro,energia,turnoID = -1,nTurno = -1;
 
-    int[] idsOrdenados = new int[listaJog.size()];
 
-    public void turnos(String[][] playersInfo){
 
-        for(int i = 0; i < playersInfo.length; i++){
+    public void trocarTurno(){
 
-            idsOrdenados[i] = Integer.parseInt(playersInfo[i][0]);
+        int[] idsOrdenados = new int[listaJog.size()];
+
+        Player p = listaJog.get(0);
+
+        for(int x = 0; x < idsOrdenados.length; x++){
+            idsOrdenados[x] = p.id;
         }
 
         Arrays.sort(idsOrdenados);
 
-        turnoID = idsOrdenados[0];
-        Nturno = 0;
-    }
-
-    public void trocarTurno(){
-            if(turnoID == idsOrdenados[idsOrdenados.length-1]){
+            if(nTurno == idsOrdenados.length){
                 turnoID = idsOrdenados[0];
-                Nturno = 0;
+                nTurno = 0;
                 return;
-
         }
 
-        turnoID = idsOrdenados[Nturno+1];
-        Nturno++;
+        turnoID = idsOrdenados[nTurno+1];
+        nTurno++;
+
     }
 
 
     public void criarPlayers(String [][] playersInfo,int initialEnergy){
 
-        ArrayList<Integer> jogPos = new ArrayList<>();
 
         for(int i = 0; i < playersInfo.length; i++) {
 
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
 
-            Player p = listaJog.get(i);
-            jogPos.add(p.id);
-
             listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
             listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
         }
 
         energia = initialEnergy;
-
-
     }
 
 
@@ -105,7 +98,9 @@ public class GameManager {
 
             int repeteID = 0;
 
-
+            if(!playersInfo[i][0].matches("^[0-9]*$") || playersInfo[i][0] == null){
+                return false;
+            }
 
             for(int x = 0; x < playersInfo.length; x++){
 
@@ -173,9 +168,6 @@ public class GameManager {
 
         //criar os jogadores
         criarPlayers(playersInfo,initialEnergy);
-        //criar turnos
-        turnos(playersInfo);
-
 
         return true;
     }
