@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 
+
 public class GameManager {
 
     public GameManager() {
@@ -21,16 +22,22 @@ public class GameManager {
 
     public void criarPlayers(String [][] playersInfo,int initialEnergy){
 
+        ArrayList<Integer> jogPos = new ArrayList<>();
+
         for(int i = 0; i < playersInfo.length; i++) {
 
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
+
+            Player p = listaJog.get(i);
+            jogPos.add(p.id);
 
             listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
             listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
         }
 
         energia = initialEnergy;
+
 
     }
 
@@ -60,6 +67,7 @@ public class GameManager {
         return especies;
     }
 
+
     public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
 
         tamanhoTabuleiro = jungleSize;
@@ -67,6 +75,13 @@ public class GameManager {
         //verifica se existe algum utilizador com o mesmo ID e se o ID é válido
 
         for(int i = 0; i < playersInfo.length; i++){
+
+            char s = playersInfo[i][0].charAt(i);
+
+            if(s != '0' || s != '1' || s != '2' || s != '3' || s != '4' || s != '5' || s != '6' || s != '7' || s != '8' || s != '9'
+                    || playersInfo[i][0] == null){
+                return false;
+            }
 
             int repeteID = 0;
 
@@ -80,12 +95,7 @@ public class GameManager {
                     return false;
                 }
             }
-
-            if(playersInfo[i][0] == null){
-                return false;
-            }
         }
-
 
         //verifica os nomes dos jogadores
 
@@ -145,6 +155,7 @@ public class GameManager {
 
         return true;
     }
+
 
 
     public int[] getPlayerIds(int squareNr) {
