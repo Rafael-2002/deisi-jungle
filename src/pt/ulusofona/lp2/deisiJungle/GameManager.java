@@ -144,7 +144,7 @@ public class GameManager {
         ArrayList<Player> jogPos = new ArrayList<>();
 
         if(squareNr < 1 || squareNr > tamanhoTabuleiro){
-            return new int[0];
+            return new int[]{};
         }
 
         for (int i = 0; i < listaJog.size(); i++) {
@@ -156,8 +156,6 @@ public class GameManager {
             }
 
         }
-
-
         int[] array = new int[jogPos.size()];
 
         for (int x = 0; x < jogPos.size(); x++) {
