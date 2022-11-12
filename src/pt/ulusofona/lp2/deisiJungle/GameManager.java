@@ -19,6 +19,22 @@ public class GameManager {
     int pos = 1, tamanhoTabuleiro,energia;
 
 
+    public void criarPlayers(String [][] playersInfo,int initialEnergy){
+
+        for(int i = 0; i < playersInfo.length; i++) {
+
+            String nome = playersInfo[i][1];
+            String especie = playersInfo[i][2];
+
+            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
+            listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
+        }
+
+        energia = initialEnergy;
+
+    }
+
+
     public String[][] getSpecies() {
 
         especies[0][0] = "E";
@@ -124,17 +140,8 @@ public class GameManager {
         }
 
         //criar os jogadores
+        criarPlayers(playersInfo,initialEnergy);
 
-        for(int i = 0; i < playersInfo.length; i++) {
-
-            String nome = playersInfo[i][1];
-            String especie = playersInfo[i][2];
-
-            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
-            listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
-        }
-
-        energia = initialEnergy;
 
         return true;
     }
