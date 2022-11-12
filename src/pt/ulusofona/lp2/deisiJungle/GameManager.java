@@ -16,7 +16,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-    int pos, tamanhoTabuleiro,energia;
+    int pos = 1, tamanhoTabuleiro,energia;
 
 
     public String[][] getSpecies() {
@@ -130,7 +130,7 @@ public class GameManager {
             String nome = playersInfo[i][1];
             String especie = playersInfo[i][2];
 
-            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, 1));
+            listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
             listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
         }
 
