@@ -12,7 +12,7 @@ public class GameManager {
     }
 
     ArrayList<Player> listaJog = new ArrayList<>();
-    ArrayList<Player> listaJogSpos = new ArrayList<>();
+
     String[][] especies = new String[5][3];
     int pos = 1, tamanhoTabuleiro, energia, nTurno;
     int[] ordemTurnos;
@@ -44,7 +44,7 @@ public class GameManager {
             String especie = playersInfo[i][2];
 
             listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, pos));
-            listaJogSpos.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy));
+
         }
 
         energia = initialEnergy;
@@ -270,9 +270,9 @@ public class GameManager {
         String[] infoPlayers = new String[4];
         int check = 0;
 
-        for (int i = 0; i < listaJogSpos.size(); i++) {
+        for (int i = 0; i < listaJog.size(); i++) {
 
-            Player p = listaJogSpos.get(i);
+            Player p = listaJog.get(i);
 
             if (p.id == ordemTurnos[nTurno]) {
                 infoPlayers[0] = String.valueOf(p.id);
@@ -291,14 +291,14 @@ public class GameManager {
 
     public String[][] getPlayersInfo() {
 
-        String[][] infoPlayers = new String[listaJogSpos.size()][4];
+        String[][] infoPlayers = new String[listaJog.size()][4];
 
-        if (listaJogSpos.size() == 0) {
+        if (listaJog.size() == 0) {
             return null;
         }
 
-        for (int i = 0; i < listaJogSpos.size(); i++) {
-            Player p = listaJogSpos.get(i);
+        for (int i = 0; i < listaJog.size(); i++) {
+            Player p = listaJog.get(i);
 
             infoPlayers[i][0] = String.valueOf(p.id);
             infoPlayers[i][1] = p.nome;
@@ -314,53 +314,87 @@ public class GameManager {
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
 
-        for (int i = 0; i < listaJog.size(); i++) {
+        ArrayList<Player> jogadores = new ArrayList<>();
 
-            if (listaJog.get(i).pos == nrSquares) {
-                if (bypassValidations) {
-                    pos += nrSquares;
-                    energia -= 2;
 
-                    if (nTurno == listaJog.size()) {
-                        nTurno = 0;
-                    } else {
-                        nTurno++;
-                    }
+        for(int i = 0; i < listaJog.size();i++){
+            Player p = listaJog.get(i);
+            if(p.id == ordemTurnos[nTurno]){
+                jogadores.add(p);
+            }
+        }
 
+        if(jogadores.get(0).energia < 2 || jogadores.get(0).pos >= tamanhoTabuleiro){
+            return false;
+        }
+
+        if(bypassValidations) {
+
+            pos+=nrSquares;
+            energia -= 2;
+
+            if (nTurno == listaJog.size()) {
+                nTurno = 0;
+            } else {
+                nTurno++;
+            }
+
+
+            for(int i = 0; i < listaJog.size();i++) {
+
+                if (listaJog.get(i).id == jogadores.get(0).id) {
                     listaJog.get(i).pos = pos;
 
-                    return true;
-
-                } else {
-                    if (nrSquares < 1 || nrSquares > 6) {
-                        trocarTurno();
-                        return false;
-                    }
                 }
-                pos += nrSquares;
-                energia -= 2;
+            }
 
-                if (nTurno == listaJog.size()) {
-                    nTurno = 0;
-                } else {
-                    nTurno++;
-                }
+        }else {
 
-                listaJog.get(i).pos = pos;
+            if(nrSquares < 1 || nrSquares > 6) {
 
-                return true;
-            } else {
+                nTurno++;
                 return false;
+
             }
 
         }
 
+            pos += nrSquares;
+            energia -= 2;
+
+            for(int i = 0; i < listaJog.size();i++) {
+
+                if (listaJog.get(i).id == jogadores.get(0).id) {
+                    listaJog.get(i).pos = pos;
+
+                }
+            }
+
         return true;
 
-    }
+        }
 
 
         public String[] getWinnerInfo () {
+
+        String[] winner = new String[4];
+        ArrayList<Player> jog = new ArrayList<>();
+
+        for(int i = 0; i < listaJog.size();i++){
+
+            Player p  = listaJog.get(i);
+
+            if(p.pos == tamanhoTabuleiro){
+                winner[0] = String.valueOf(p.id);
+                winner[1] = p.nome;
+                winner[2] = p.especie;
+                winner[3] = String.valueOf(p.energia);
+
+            }else{
+                return null;
+            }
+        }
+
 
             return new String[0];
         }
