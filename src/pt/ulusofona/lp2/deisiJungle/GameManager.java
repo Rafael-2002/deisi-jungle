@@ -76,14 +76,11 @@ public class GameManager {
 
         for(int i = 0; i < playersInfo.length; i++){
 
-            char s = playersInfo[i][0].charAt(i);
+            int repeteID = 0;
 
-            if(s != '0' || s != '1' || s != '2' || s != '3' || s != '4' || s != '5' || s != '6' || s != '7' || s != '8' || s != '9'
-                    || playersInfo[i][0] == null){
+            if(!playersInfo[i][0].matches("^[0-9]*$") || playersInfo[i][0] == null){
                 return false;
             }
-
-            int repeteID = 0;
 
             for(int x = 0; x < playersInfo.length; x++){
 
