@@ -18,30 +18,23 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-    int pos = 1, tamanhoTabuleiro,energia,turnoID = -1,nTurno = -1;
-
+    int pos, tamanhoTabuleiro,energia,nTurno;
+    int[] ordemTurnos;
 
 
     public void trocarTurno(){
 
-        int[] idsOrdenados = new int[listaJog.size()];
+        ordemTurnos = new int[listaJog.size()];
 
-        Player p = listaJog.get(0);
+        for (int i = 0; i < listaJog.size(); i++) {
 
-        for(int x = 0; x < idsOrdenados.length; x++){
-            idsOrdenados[x] = p.id;
+            Player p = listaJog.get(i);
+
+            ordemTurnos[i] = p.id;
+
         }
 
-        Arrays.sort(idsOrdenados);
-
-            if(nTurno == idsOrdenados.length){
-                turnoID = idsOrdenados[0];
-                nTurno = 0;
-                return;
-        }
-
-        turnoID = idsOrdenados[nTurno+1];
-        nTurno++;
+        Arrays.sort(ordemTurnos);
 
     }
 
@@ -59,6 +52,7 @@ public class GameManager {
         }
 
         energia = initialEnergy;
+
     }
 
 
@@ -168,7 +162,7 @@ public class GameManager {
 
         //criar os jogadores
         criarPlayers(playersInfo,initialEnergy);
-
+        trocarTurno();
         return true;
     }
 
@@ -268,8 +262,6 @@ public class GameManager {
         }
     }
 
-
-
     public String[] getCurrentPlayerInfo(){
 
         String[] infoPlayers = new String[4];
@@ -279,7 +271,7 @@ public class GameManager {
 
             Player p = listaJogSpos.get(i);
 
-            if (p.id == turnoID) {
+            if (p.id == ordemTurnos[nTurno]) {
                 infoPlayers[0] = String.valueOf(p.id);
                 infoPlayers[1] = p.nome;
                 infoPlayers[2] = p.especie;
@@ -321,7 +313,13 @@ public class GameManager {
         if(bypassValidations){
             pos += nrSquares;
             energia -= 2;
-            trocarTurno();
+
+
+            if(nTurno == listaJog.size()){
+                nTurno = 0;
+            }else{
+                nTurno++;
+            }
             return true;
         }else{
             if(nrSquares < 1 || nrSquares > 6){
@@ -331,7 +329,13 @@ public class GameManager {
         }
         pos += nrSquares;
         energia -= 2;
-        trocarTurno();
+
+        if(nTurno == listaJog.size()){
+            nTurno = 0;
+        }else{
+            nTurno++;
+        }
+
         return true;
     }
 
