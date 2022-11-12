@@ -139,6 +139,7 @@ public class GameManager {
         return true;
     }
 
+
     public int[] getPlayerIds(int squareNr) {
 
         ArrayList<Player> jogPos = new ArrayList<>();
@@ -244,6 +245,10 @@ public class GameManager {
 
         String [][] infoPlayers = new String[listaJogSpos.size()][4];
 
+        if(listaJogSpos.size() == 0){
+            return null;
+        }
+
         for (int i = 0; i < listaJogSpos.size(); i++) {
             Player p = listaJogSpos.get(i);
             
@@ -263,6 +268,7 @@ public class GameManager {
         if(bypassValidations){
             pos += nrSquares;
             energia -= 2;
+
             return true;
         }else{
             if(nrSquares < 1 || nrSquares > 6){
