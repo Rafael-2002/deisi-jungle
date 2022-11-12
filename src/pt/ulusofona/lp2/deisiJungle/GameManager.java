@@ -2,11 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
-
+import java.util.*;
 
 
 public class GameManager {
@@ -18,7 +14,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
     ArrayList<Player> listaJogSpos = new ArrayList<>();
     String[][] especies = new String[5][3];
-    int pos, tamanhoTabuleiro,energia,nTurno;
+    int pos=1, tamanhoTabuleiro,energia,nTurno;
     int[] ordemTurnos;
 
 
@@ -240,26 +236,33 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
 
+        ArrayList<Player> jogPos = new ArrayList<>();
+
         String[] infoPlayers = new String[4];
-        int check = 0;
 
-        for (int i = 0; i < listaJogSpos.size(); i++) {
+        for (int i = 0; i < listaJog.size(); i++) {
 
-            Player p = listaJogSpos.get(i);
+            Player p = listaJog.get(i);
 
             if (p.id == playerId) {
-                infoPlayers[0] = String.valueOf(p.id);
-                infoPlayers[1] = p.nome;
-                infoPlayers[2] = p.especie;
-                infoPlayers[3] = String.valueOf(p.energia);
-                check= 1;
+                jogPos.add(p);
+            }else{
+                return null;
             }
+
         }
-        if(check == 1) {
-            return infoPlayers;
-        }else{
-            return null;
+
+        for (int x = 0; x < jogPos.size(); x++) {
+            Player p = jogPos.get(x);
+
+            infoPlayers[0] = String.valueOf(p.id);
+            infoPlayers[1] = p.nome;
+            infoPlayers[2] = p.especie;
+            infoPlayers[3] = String.valueOf(p.energia);
         }
+
+        return infoPlayers;
+
     }
 
     public String[] getCurrentPlayerInfo(){
@@ -361,7 +364,7 @@ public class GameManager {
 
     public String whoIsTaborda() {
 
-        return "Portuguese professional wrestler";
+        return "professional wrestler";
     }
 
 }
