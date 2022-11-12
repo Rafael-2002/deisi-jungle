@@ -14,7 +14,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
 
     String[][] especies = new String[5][3];
-    int tamanhoTabuleiro, energia, nTurno;
+    int tamanhoTabuleiro, energia, nTurno = 0;
     int[] ordemTurnos;
 
 
@@ -338,7 +338,7 @@ public class GameManager {
             pos+=nrSquares;
             energia -= 2;
 
-            if (nTurno == listaJog.size()) {
+            if (nTurno == listaJog.size()-1) {
                 nTurno = 0;
             } else {
                 nTurno++;
@@ -374,7 +374,12 @@ public class GameManager {
 
                 }
             }
-        nTurno++;
+
+        if (nTurno == listaJog.size()-1) {
+            nTurno = 0;
+        } else {
+            nTurno++;
+        }
         return true;
 
         }
