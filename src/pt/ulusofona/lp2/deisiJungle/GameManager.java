@@ -327,9 +327,21 @@ public class GameManager {
             }
         }
 
-        if(jogadores.get(0).energia < 2 || jogadores.get(0).pos >= tamanhoTabuleiro){
+        if(jogadores.get(0).energia < 2){
 
-            return false;
+            if (nTurno == listaJog.size()-1) {
+                nTurno = 0;
+            } else {
+                nTurno++;
+            }
+            return true;
+        }
+
+        if(jogadores.get(0).pos >= tamanhoTabuleiro){
+
+            jogadores.get(0).pos = tamanhoTabuleiro;
+
+            return true;
         }
 
         if(bypassValidations) {
