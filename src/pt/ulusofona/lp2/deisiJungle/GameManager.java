@@ -14,7 +14,7 @@ public class GameManager {
     ArrayList<Player> listaJog = new ArrayList<>();
 
     String[][] especies = new String[5][3];
-    int tamanhoTabuleiro, energia, nTurno = 0;
+    int tamanhoTabuleiro, nTurno = 0;
     int[] ordemTurnos;
 
 
@@ -46,8 +46,6 @@ public class GameManager {
             listaJog.add(new Player(Integer.parseInt(playersInfo[i][0]), nome, especie, initialEnergy, 1));
 
         }
-
-        energia = initialEnergy;
 
     }
 
@@ -312,13 +310,12 @@ public class GameManager {
         return infoPlayers;
     }
 
-
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
 
 
         ArrayList<Player> jogadores = new ArrayList<>();
 
-        int pos = 1;
+        int pos = 1, energia = 0;
 
 
         for(int i = 0; i < listaJog.size();i++){
@@ -326,10 +323,12 @@ public class GameManager {
             if(p.id == ordemTurnos[nTurno]){
                 jogadores.add(p);
                 pos = p.pos;
+                energia = p.energia;
             }
         }
 
         if(jogadores.get(0).energia < 2 || jogadores.get(0).pos >= tamanhoTabuleiro){
+
             return false;
         }
 
@@ -349,7 +348,7 @@ public class GameManager {
 
                 if (listaJog.get(i).id == jogadores.get(0).id) {
                     listaJog.get(i).pos = pos;
-
+                    listaJog.get(i).energia = energia;
                 }
             }
 
@@ -371,6 +370,7 @@ public class GameManager {
 
                 if (listaJog.get(i).id == jogadores.get(0).id) {
                     listaJog.get(i).pos = pos;
+                    listaJog.get(i).energia = energia;
 
                 }
             }
@@ -389,24 +389,62 @@ public class GameManager {
 
         String[] winner = new String[4];
         ArrayList<Player> jog = new ArrayList<>();
+        Player p2;
 
-        for(int i = 0; i < listaJog.size();i++){
-
-            Player p  = listaJog.get(i);
-
-            if(p.pos == tamanhoTabuleiro){
-                winner[0] = String.valueOf(p.id);
-                winner[1] = p.nome;
-                winner[2] = p.especie;
-                winner[3] = String.valueOf(p.energia);
-
-            }else{
-                return null;
+        for(int x = 0; x < listaJog.size();x++){
+            if(listaJog.get(x).pos >= tamanhoTabuleiro){
+                p2 = listaJog.get(x);
+                jog.add(p2);
             }
         }
 
+            int[] jogOrdenados = new int[jog.size()];
 
-            return new String[0];
+            for(int y = 0; y < jog.size(); y++){
+                Player p = listaJog.get(y);
+                jogOrdenados[y] = p.id;
+            }
+
+            Arrays.sort(jogOrdenados);
+
+
+            if(jog.size() == listaJog.size()){
+                int[] posOrdenada = new int[listaJog.size()];
+                for(int i = 0; i < listaJog.size();i++){
+                    Player p = listaJog.get(i);
+                    posOrdenada[i] = p.pos;
+                }
+
+                Arrays.sort(posOrdenada);
+
+                for(int i = 0; i < listaJog.size(); i++){
+                    Player p = listaJog.get(i);
+                    if(p.pos == tamanhoTabuleiro && p.pos == jogOrdenados[listaJog.size()-1]){
+                        winner[0] = String.valueOf(jogOrdenados[listaJog.size()-1]);
+                        winner[1] = p.nome;
+                        winner[2] = p.especie;
+                        winner[3] = String.valueOf(p.energia);
+                    }else{
+                        return null;
+                    }
+                }
+
+
+            }
+
+            for(int i = 0; i < listaJog.size(); i++){
+                Player p = listaJog.get(i);
+                if(p.pos == tamanhoTabuleiro && p.id == jogOrdenados[0]){
+                    winner[0] = String.valueOf(jogOrdenados[0]);
+                    winner[1] = p.nome;
+                    winner[2] = p.especie;
+                    winner[3] = String.valueOf(p.energia);
+                }else{
+                    return null;
+                }
+            }
+
+            return winner;
         }
 
         public ArrayList<String> getGameResults () {
