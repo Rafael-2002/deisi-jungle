@@ -421,7 +421,7 @@ public class GameManager {
 
         ArrayList<Player> jogPos = new ArrayList<>();
 
-        if (squareNr < 1 || squareNr > tamanhoTabuleiro) {
+        if (squareNr < 1 || squareNr > tamanhoTabuleiro || listaJog.get(squareNr) == null) {
             return new int[0];
         }
 
