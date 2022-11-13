@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 
 public class GameManager {
@@ -421,7 +422,7 @@ public class GameManager {
 
         ArrayList<Player> jogPos = new ArrayList<>();
 
-        if (squareNr < 1 || squareNr > tamanhoTabuleiro || listaJog.get(squareNr) == null) {
+        if (squareNr < 1 || squareNr > tamanhoTabuleiro) {
             return new int[0];
         }
 
@@ -720,13 +721,14 @@ public class GameManager {
             for(int i = 0; i < listaJog.size();i++){
 
                 if(listaJog.get(i).id == jogador1){
-                        winner1[0] = String.valueOf(listaJog.get(i).id);
-                        winner1[1] = listaJog.get(i).nome;
-                        winner1[2] = listaJog.get(i).especie;
-                        winner1[3] = String.valueOf(listaJog.get(i).pos);
-                        listaJog2.remove(i);
-                        lugares();
-                        return winner1;
+                    winner1[0] = String.valueOf(listaJog.get(i).id);
+                    winner1[1] = listaJog.get(i).nome;
+                    winner1[2] = listaJog.get(i).especie;
+                    winner1[3] = String.valueOf(listaJog.get(i).pos);
+                    listaJog2.remove(i);
+                    lugares();
+
+                    return winner1;
                 }
 
             }
@@ -742,6 +744,7 @@ public class GameManager {
                 winner1[3] = String.valueOf(listaJog.get(i).pos);
                 listaJog2.remove(i);
                 lugares();
+
                 return winner1;
             }
 
@@ -759,9 +762,7 @@ public class GameManager {
 
             String nome1 = winner1[1];
             String especie1 = winner1[2];
-            String pos1 = winner1[3].toString();
-
-
+            String pos1 = winner1[3];
 
             String nome2 = winner2[1];
             String especie2 = winner2[2];

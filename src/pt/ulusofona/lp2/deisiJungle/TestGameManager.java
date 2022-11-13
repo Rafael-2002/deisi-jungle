@@ -4,29 +4,19 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 public class TestGameManager {
 
-    @Test
-    public void testCreateJungle(){
-        GameManager p = new GameManager();
-        String[][] array = {
-                { "1", "Elefante", "E"},
-                { "2", "Tarzan", "Z"},
-        };
-
-        boolean resultadoReal = p.createInitialJungle(100,100, array);
-        boolean move = p.moveCurrentPlayer(2,false);
-        boolean move2 = p.moveCurrentPlayer(2,false);
-        int[] get = p.getPlayerIds(1);
-        String[] get2 = p.getSquareInfo(1);
-
-
-
-        for(int i = 0; i < get.length ; i++){
-            System.out.println(Arrays.toString(get));
-            System.out.println(Arrays.toString(get2));
+        @Test
+        public void getPlayerIdsAfterMove(){
+            GameManager game = new GameManager();
+            String[][] players = new String[2][3];
+            players[0] = new String[]{"1","Filipe","E"};
+            players[1] = new String[]{"2","Rodrigo","Z"};
+            game.createInitialJungle(12,10,players);
+            game.moveCurrentPlayer(3,false);
+            assertEquals(players[1][0], game.getCurrentPlayerInfo()[0]);
         }
-
-    }
 
 }
