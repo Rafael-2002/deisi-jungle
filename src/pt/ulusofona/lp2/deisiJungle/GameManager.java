@@ -587,6 +587,9 @@ public class GameManager {
 
         int pos = 1, energia = 0;
 
+
+
+
         for(int i = 0; i < listaJog.size();i++){
             Player p = listaJog.get(i);
             if(p.id == ordemTurnos[nTurno]){
