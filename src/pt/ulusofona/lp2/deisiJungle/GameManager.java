@@ -177,6 +177,7 @@ public class GameManager {
         for(int i = 0; i < listaJog.size(); i++){
             int idsRepetidos = 0;
             for(int x = 0; x < listaJog.size(); x++){
+                if(listaJog.get(i).id == listaJog.get(x).id)
                 idsRepetidos++;
             }
             if(idsRepetidos > 1){
