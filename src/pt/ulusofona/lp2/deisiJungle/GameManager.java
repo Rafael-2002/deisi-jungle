@@ -398,64 +398,124 @@ public class GameManager {
 
         public String[] getWinnerInfo () {
 
-            String[] winner = new String[4];
-            ArrayList<Player> jog = new ArrayList<>();
-            Player p2;
+        int energia = 0;
+        int idJogador = 0;
+        int numJogador = 0;
+        String[] winner = new String[4];
 
-            for(int x = 0; x < listaJog.size();x++){
-                if(listaJog.get(x).pos >= tamanhoTabuleiro){
-                    p2 = listaJog.get(x);
-                    jog.add(p2);
-                }
+
+        for(int i = 0; i < listaJog.size();i++){
+            if(listaJog.get(i).energia == 0){
+                energia++;
             }
-
-            int[] jogOrdenados = new int[jog.size()];
-
-            for(int y = 0; y < jog.size(); y++){
-                Player p = listaJog.get(y);
-                jogOrdenados[y] = p.id;
-            }
-
-            Arrays.sort(jogOrdenados);
+        }
 
 
-            if(jog.size() == listaJog.size()){
-                int[] posOrdenada = new int[listaJog.size()];
-                for(int i = 0; i < listaJog.size();i++){
-                    Player p = listaJog.get(i);
-                    posOrdenada[i] = p.pos;
-                }
+        if(energia == listaJog.size()){
 
-                Arrays.sort(posOrdenada);
+            switch (energia){
+                case 2:
+                    if(listaJog.get(0).pos != listaJog.get(1).pos) {
 
-                for(int i = 0; i < listaJog.size(); i++){
-                    Player p = listaJog.get(i);
-                    if(p.pos == tamanhoTabuleiro && p.pos == jogOrdenados[listaJog.size()-1]){
-                        winner[0] = String.valueOf(jogOrdenados[listaJog.size()-1]);
-                        winner[1] = p.nome;
-                        winner[2] = p.especie;
-                        winner[3] = String.valueOf(p.energia);
+                        if (listaJog.get(0).pos > listaJog.get(1).pos) {
+                            idJogador = listaJog.get(0).id;
+                        } else {
+                            idJogador = listaJog.get(1).id;
+                        }
                     }else{
-                        return null;
+                        if(listaJog.get(0).id < listaJog.get(1).id){
+                            idJogador = listaJog.get(0).id;
+                        }else{
+                            idJogador = listaJog.get(1).id;
+                        }
                     }
-                }
+                break;
 
+                case 3:
 
+                    if(listaJog.get(0).pos != listaJog.get(1).pos || listaJog.get(0).pos != listaJog.get(2).pos || listaJog.get(1).pos != listaJog.get(2).pos) {
+
+                        if (listaJog.get(0).pos > listaJog.get(1).pos && listaJog.get(0).pos > listaJog.get(2).pos) {
+                            idJogador = listaJog.get(0).id;
+
+                        } else if (listaJog.get(1).pos > listaJog.get(0).pos && listaJog.get(1).pos > listaJog.get(2).pos) {
+                            idJogador = listaJog.get(1).id;
+
+                        } else {
+                            idJogador = listaJog.get(2).id;
+                        }
+                    }else{
+
+                        if (listaJog.get(0).id < listaJog.get(1).id && listaJog.get(0).id < listaJog.get(2).id) {
+                            idJogador = listaJog.get(0).id;
+
+                        } else if (listaJog.get(1).id < listaJog.get(0).id && listaJog.get(1).id < listaJog.get(2).id) {
+                            idJogador = listaJog.get(1).id;
+
+                        } else {
+                            idJogador = listaJog.get(2).id;
+                        }
+                    }
+                break;
+
+                case 4:
+
+                    if(listaJog.get(0).pos != listaJog.get(1).pos || listaJog.get(0).pos != listaJog.get(2).pos || listaJog.get(0).pos != listaJog.get(3).pos ||
+                            listaJog.get(1).pos != listaJog.get(2).pos || listaJog.get(1).pos != listaJog.get(3).pos || listaJog.get(2).pos != listaJog.get(3).pos) {
+
+                        if (listaJog.get(0).pos > listaJog.get(1).pos && listaJog.get(0).pos > listaJog.get(2).pos && listaJog.get(0).pos > listaJog.get(3).pos) {
+                            idJogador = listaJog.get(0).id;
+
+                        } else if (listaJog.get(1).pos > listaJog.get(0).pos && listaJog.get(1).pos > listaJog.get(2).pos && listaJog.get(1).pos > listaJog.get(3).pos) {
+                            idJogador = listaJog.get(1).id;
+
+                        } else if (listaJog.get(2).pos > listaJog.get(0).pos && listaJog.get(2).pos > listaJog.get(1).pos && listaJog.get(2).pos > listaJog.get(3).pos) {
+                            idJogador = listaJog.get(2).id;
+
+                        } else {
+                            idJogador = listaJog.get(3).id;
+                        }
+                    }else{
+
+                        if (listaJog.get(0).id < listaJog.get(1).id && listaJog.get(0).id < listaJog.get(2).id && listaJog.get(0).id < listaJog.get(3).id) {
+                            idJogador = listaJog.get(0).id;
+
+                        } else if (listaJog.get(1).id < listaJog.get(0).id && listaJog.get(1).id < listaJog.get(2).id && listaJog.get(1).id < listaJog.get(3).id) {
+                            idJogador = listaJog.get(1).id;
+
+                        } else if (listaJog.get(2).id < listaJog.get(0).id && listaJog.get(2).id < listaJog.get(1).id && listaJog.get(2).id < listaJog.get(3).id) {
+                            idJogador = listaJog.get(2).id;
+
+                        } else {
+                            idJogador = listaJog.get(3).id;
+                        }
+                    }
             }
 
             for(int i = 0; i < listaJog.size(); i++){
-                Player p = listaJog.get(i);
-                if(p.pos == tamanhoTabuleiro && p.id == jogOrdenados[0]){
-                    winner[0] = String.valueOf(jogOrdenados[0]);
-                    winner[1] = p.nome;
-                    winner[2] = p.especie;
-                    winner[3] = String.valueOf(p.energia);
-                }else{
-                    return null;
+                if(idJogador == listaJog.get(i).id){
+                    winner[0] = String.valueOf(listaJog.get(i).id);
+                    winner[1] = listaJog.get(i).nome;
+                    winner[2] = listaJog.get(i).especie;
+                    winner[3] = String.valueOf(listaJog.get(i).pos);
+
+                    return winner;
                 }
             }
+        }
 
-            return winner;
+
+        for(int i = 0; i < listaJog.size(); i++){
+            if(listaJog.get(i).pos == tamanhoTabuleiro){
+                winner[0] = String.valueOf(listaJog.get(i).id);
+                winner[1] = listaJog.get(i).nome;
+                winner[2] = listaJog.get(i).especie;
+                winner[3] = String.valueOf(listaJog.get(i).pos);
+
+                return winner;
+            }
+        }
+            return null;
         }
 
 
