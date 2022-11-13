@@ -166,7 +166,7 @@ public class GameManager {
         ArrayList<Player> jogPos = new ArrayList<>();
 
         if (squareNr < 1 || squareNr > tamanhoTabuleiro) {
-            return new int[]{};
+            return new int[0];
         }
 
         for (int i = 0; i < listaJog.size(); i++) {
@@ -396,19 +396,18 @@ public class GameManager {
 
         }
 
-
         public String[] getWinnerInfo () {
 
-        String[] winner = new String[4];
-        ArrayList<Player> jog = new ArrayList<>();
-        Player p2;
+            String[] winner = new String[4];
+            ArrayList<Player> jog = new ArrayList<>();
+            Player p2;
 
-        for(int x = 0; x < listaJog.size();x++){
-            if(listaJog.get(x).pos >= tamanhoTabuleiro){
-                p2 = listaJog.get(x);
-                jog.add(p2);
+            for(int x = 0; x < listaJog.size();x++){
+                if(listaJog.get(x).pos >= tamanhoTabuleiro){
+                    p2 = listaJog.get(x);
+                    jog.add(p2);
+                }
             }
-        }
 
             int[] jogOrdenados = new int[jog.size()];
 
@@ -459,6 +458,8 @@ public class GameManager {
             return winner;
         }
 
+
+
         public ArrayList<String> getGameResults () {
 
             return null;
@@ -472,7 +473,7 @@ public class GameManager {
 
         public String whoIsTaborda () {
 
-            return "professional wrestler";
+            return "professional wrestling";
         }
 
     }
