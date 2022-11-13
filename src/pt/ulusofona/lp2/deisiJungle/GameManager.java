@@ -12,11 +12,15 @@ public class GameManager {
     }
 
     ArrayList<Player> listaJog = new ArrayList<>();
+    ArrayList<Player> listaJog2 = new ArrayList<>();
 
     String[][] especies = new String[5][3];
-    int tamanhoTabuleiro, nTurno = 0;
+    int tamanhoTabuleiro, nTurno = 0,numJogadores = 0;
     int[] ordemTurnos;
     String[] winner1 = new String[4];
+    String[] winner2 = new String[4];
+    String[] winner3 = new String[4];
+    String[] winner4 = new String[4];
     int lugar2 = 5;
     int lugar3 = 5;
     int lugar4 = 5;
@@ -51,6 +55,255 @@ public class GameManager {
         }
 
     }
+
+    public void lugar2(){
+
+        int jogadorVencedor = Integer.parseInt(winner1[0]);
+
+
+        int maxPos = listaJog2.get(0).pos;
+        int energia = 0;
+        int numJog = 0;
+        int minId = listaJog2.get(0).id;
+        int jogador1 = 0;
+
+        for (int i = 0; i < listaJog2.size(); i++) {
+
+            if (maxPos < listaJog2.get(i).pos) {
+                maxPos = listaJog2.get(i).pos;
+            }
+            if(minId > listaJog2.get(i).id){
+                minId = listaJog2.get(i).id;
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+            if(listaJog2.get(i).energia == 0){
+                energia++;
+            }
+            if(maxPos == listaJog2.get(i).pos){
+                numJog++;
+            }
+        }
+
+
+        if(energia == listaJog2.size()) {
+
+            for(int i = 0; i < listaJog2.size();i++){
+                if(maxPos == listaJog2.get(i).pos){
+                    if(numJog > 1){
+                        if(minId == listaJog2.get(i).id){
+                            jogador1 = minId;
+                        }
+                    }else{
+                        jogador1 = listaJog2.get(i).id;
+                    }
+                }
+            }
+
+            for(int i = 0; i < listaJog2.size();i++){
+
+                if(listaJog2.get(i).id == jogador1){
+                    winner2[0] = String.valueOf(listaJog2.get(i).id);
+                    winner2[1] = listaJog2.get(i).nome;
+                    winner2[2] = listaJog2.get(i).especie;
+                    winner2[3] = String.valueOf(listaJog2.get(i).pos);
+                    listaJog2.remove(i);
+                    return;
+                }
+
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+
+            if(listaJog2.get(i).pos == tamanhoTabuleiro){
+                winner2[0] = String.valueOf(listaJog2.get(i).id);
+                winner2[1] = listaJog2.get(i).nome;
+                winner2[2] = listaJog2.get(i).especie;
+                winner2[3] = String.valueOf(listaJog2.get(i).pos);
+                listaJog2.remove(i);
+                return;
+            }
+
+        }
+
+
+    }
+
+    public void lugar3(){
+
+
+        int jogadorVencedor = Integer.parseInt(winner1[0]);
+
+        int maxPos = listaJog2.get(0).pos;
+        int energia = 0;
+        int numJog = 0;
+        int minId = listaJog2.get(0).id;
+        int jogador1 = 0;
+
+        for (int i = 0; i < listaJog2.size(); i++) {
+
+            if (maxPos < listaJog2.get(i).pos) {
+                maxPos = listaJog2.get(i).pos;
+            }
+            if(minId > listaJog2.get(i).id){
+                minId = listaJog2.get(i).id;
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+            if(listaJog2.get(i).energia == 0){
+                energia++;
+            }
+            if(maxPos == listaJog2.get(i).pos){
+                numJog++;
+            }
+        }
+
+
+        if(energia == listaJog2.size()) {
+
+            for(int i = 0; i < listaJog2.size();i++){
+                if(maxPos == listaJog2.get(i).pos){
+                    if(numJog > 1){
+                        if(minId == listaJog2.get(i).id){
+                            jogador1 = minId;
+                        }
+                    }else{
+                        jogador1 = listaJog2.get(i).id;
+                    }
+                }
+            }
+
+            for(int i = 0; i < listaJog2.size();i++){
+
+                if(listaJog2.get(i).id == jogador1){
+                    winner3[0] = String.valueOf(listaJog2.get(i).id);
+                    winner3[1] = listaJog2.get(i).nome;
+                    winner3[2] = listaJog2.get(i).especie;
+                    winner3[3] = String.valueOf(listaJog2.get(i).pos);
+                    listaJog2.remove(i);
+                    return;
+                }
+
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+
+            if(listaJog2.get(i).pos == tamanhoTabuleiro){
+                winner3[0] = String.valueOf(listaJog2.get(i).id);
+                winner3[1] = listaJog2.get(i).nome;
+                winner3[2] = listaJog2.get(i).especie;
+                winner3[3] = String.valueOf(listaJog2.get(i).pos);
+                listaJog2.remove(i);
+                return;
+            }
+
+        }
+
+
+    }
+
+    public void lugar4(){
+
+
+        int jogadorVencedor = Integer.parseInt(winner1[0]);
+
+        int maxPos = listaJog2.get(0).pos;
+        int energia = 0;
+        int numJog = 0;
+        int minId = listaJog2.get(0).id;
+        int jogador1 = 0;
+
+        for (int i = 0; i < listaJog2.size(); i++) {
+
+            if (maxPos < listaJog2.get(i).pos) {
+                maxPos = listaJog2.get(i).pos;
+            }
+            if(minId > listaJog2.get(i).id){
+                minId = listaJog2.get(i).id;
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+            if(listaJog2.get(i).energia == 0){
+                energia++;
+            }
+            if(maxPos == listaJog2.get(i).pos){
+                numJog++;
+            }
+        }
+
+
+        if(energia == listaJog2.size()) {
+
+            for(int i = 0; i < listaJog2.size();i++){
+                if(maxPos == listaJog2.get(i).pos){
+                    if(numJog > 1){
+                        if(minId == listaJog2.get(i).id){
+                            jogador1 = minId;
+                        }
+                    }else{
+                        jogador1 = listaJog2.get(i).id;
+                    }
+                }
+            }
+
+            for(int i = 0; i < listaJog2.size();i++){
+
+                if(listaJog2.get(i).id == jogador1){
+                    winner4[0] = String.valueOf(listaJog2.get(i).id);
+                    winner4[1] = listaJog2.get(i).nome;
+                    winner4[2] = listaJog2.get(i).especie;
+                    winner4[3] = String.valueOf(listaJog2.get(i).pos);
+                    listaJog2.remove(i);
+                    return;
+                }
+
+            }
+
+        }
+
+        for(int i = 0; i < listaJog2.size();i++){
+
+            if(listaJog2.get(i).pos == tamanhoTabuleiro){
+                winner4[0] = String.valueOf(listaJog2.get(i).id);
+                winner4[1] = listaJog2.get(i).nome;
+                winner4[2] = listaJog2.get(i).especie;
+                winner4[3] = String.valueOf(listaJog2.get(i).pos);
+                listaJog2.remove(i);
+                return;
+            }
+
+        }
+
+
+    }
+
+    public void lugares(){
+        if(numJogadores == 2){
+            lugar2();
+        }
+
+        if(numJogadores == 3){
+            lugar2();
+            lugar3();
+        }
+
+        if(numJogadores == 4){
+            lugar2();
+            lugar3();
+            lugar4();
+        }
+    }
+
 
 
     public String[][] getSpecies() {
@@ -334,6 +587,8 @@ public class GameManager {
         int pos = 1, energia = 0;
 
 
+
+
         for(int i = 0; i < listaJog.size();i++){
             Player p = listaJog.get(i);
             if(p.id == ordemTurnos[nTurno]){
@@ -416,15 +671,20 @@ public class GameManager {
 
         int maxPos = listaJog.get(0).pos;
         int energia = 0;
-        String[] winner = new String[4];
         int numJog = 0;
         int minId = listaJog.get(0).id;
         int jogador1 = 0;
 
+        numJogadores = listaJog.size();
+
+        listaJog2 = listaJog;
+
+
+
         for (int i = 0; i < listaJog.size(); i++) {
 
             if (maxPos < listaJog.get(i).pos) {
-                maxPos = listaJog.get(i).id;
+                maxPos = listaJog.get(i).pos;
             }
             if(minId > listaJog.get(i).id){
                 minId = listaJog.get(i).id;
@@ -463,6 +723,8 @@ public class GameManager {
                         winner1[1] = listaJog.get(i).nome;
                         winner1[2] = listaJog.get(i).especie;
                         winner1[3] = String.valueOf(listaJog.get(i).pos);
+                        listaJog2.remove(i);
+                        lugares();
                         return winner1;
                 }
 
@@ -477,6 +739,8 @@ public class GameManager {
                 winner1[1] = listaJog.get(i).nome;
                 winner1[2] = listaJog.get(i).especie;
                 winner1[3] = String.valueOf(listaJog.get(i).pos);
+                listaJog2.remove(i);
+                lugares();
                 return winner1;
             }
 
@@ -488,7 +752,72 @@ public class GameManager {
 
         public ArrayList<String> getGameResults () {
 
-            return null;
+        ArrayList<String> p = new ArrayList<>();
+
+        if(listaJog.size() == 2){
+
+            String nome1 = winner1[1];
+            String especie1 = winner1[2];
+            String pos1 = winner1[3].toString();
+
+
+
+            String nome2 = winner2[1];
+            String especie2 = winner2[2];
+            String pos2 = winner2[3];
+
+            String lugar1 = "#1 " + nome1 + ", " + especie1 + ", " + pos1 + "\n" + "#2 " + nome2 + ", " + especie2 + ", " + pos2;
+
+            p.add(lugar1);
+
+        }
+
+        if(listaJog.size() == 3){
+            String nome1 = winner1[1];
+            String especie1 = winner1[2];
+            String pos1 = winner1[3];
+
+            String nome2 = winner2[1];
+            String especie2 = winner2[2];
+            String pos2 = winner2[3];
+
+            String nome3 = winner3[1];
+            String especie3 = winner3[2];
+            String pos3 = winner3[3];
+
+            String lugar1 = "#1 " + winner1[1] + ", " + especie1 + ", " + pos1 + "\n"
+                    + "#2 " + nome2 + ", " + especie2 + ", " + pos2 + "\n" + "#3 " + nome3 + ", " + especie3 + ", " + pos3;
+
+            p.add(lugar1);
+        }
+
+            if(listaJog.size() == 4){
+                String nome1 = winner1[1];
+                String especie1 = winner1[2];
+                String pos1 = winner1[3];
+
+
+
+                String nome2 = winner2[1];
+                String especie2 = winner2[2];
+                String pos2 = winner2[3];
+
+                String nome3 = winner3[1];
+                String especie3 = winner3[2];
+                String pos3 = winner3[3];
+
+                String nome4 = winner4[1];
+                String especie4 = winner4[2];
+                String pos4 = winner4[3];
+
+                String lugar1 = "#1 " + nome1 + ", " + especie1 + ", " + pos1 + "\n" + "#2 " + nome2 + ", " + especie2 + ", " + pos2
+                        + "\n" + "#3 " + nome3 + ", " + especie3 + ", " + pos3 + "\n" + "#4 " + nome4 + ", " + especie4 + ", " + pos4;
+
+                p.add(lugar1);
+
+            }
+
+            return p;
         }
 
         public JPanel getAuthorsPanel () {
