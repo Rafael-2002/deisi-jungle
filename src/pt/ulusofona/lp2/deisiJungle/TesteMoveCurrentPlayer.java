@@ -23,12 +23,16 @@ public class TesteMoveCurrentPlayer {
         boolean move = p.moveCurrentPlayer(2,false);
         boolean move2 = p.moveCurrentPlayer(2,false);
         int[] get = p.getPlayerIds(1);
+        String[] get2 = p.getSquareInfo(1);
 
 
 
         for(int i = 0; i < get.length ; i++){
             System.out.println(Arrays.toString(get));
+            System.out.println(Arrays.toString(get2));
         }
+
+
 
     }
 
