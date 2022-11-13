@@ -16,7 +16,10 @@ public class GameManager {
     String[][] especies = new String[5][3];
     int tamanhoTabuleiro, nTurno = 0;
     int[] ordemTurnos;
-
+    String[] winner1 = new String[4];
+    int lugar2 = 5;
+    int lugar3 = 5;
+    int lugar4 = 5;
 
     public void trocarTurno() {
 
@@ -167,6 +170,18 @@ public class GameManager {
 
         if (squareNr < 1 || squareNr > tamanhoTabuleiro) {
             return new int[0];
+        }
+
+
+
+        for(int i = 0; i < listaJog.size(); i++){
+            int idsRepetidos = 0;
+            for(int x = 0; x < listaJog.size(); x++){
+                idsRepetidos++;
+            }
+            if(idsRepetidos > 1){
+                return new int[0];
+            }
         }
 
         for (int i = 0; i < listaJog.size(); i++) {
@@ -337,7 +352,7 @@ public class GameManager {
             return true;
         }
 
-        if(jogadores.get(0).pos >= tamanhoTabuleiro){
+        if(jogadores.get(0).pos + nrSquares >= tamanhoTabuleiro){
 
             jogadores.get(0).pos = tamanhoTabuleiro;
 
@@ -396,127 +411,77 @@ public class GameManager {
 
         }
 
-        public String[] getWinnerInfo () {
+    public String[] getWinnerInfo () {
 
+        int maxPos = listaJog.get(0).pos;
         int energia = 0;
-        int idJogador = 0;
-        int numJogador = 0;
         String[] winner = new String[4];
+        int numJog = 0;
+        int minId = listaJog.get(0).id;
+        int jogador1 = 0;
 
+        for (int i = 0; i < listaJog.size(); i++) {
+
+            if (maxPos < listaJog.get(i).pos) {
+                maxPos = listaJog.get(i).id;
+            }
+            if(minId > listaJog.get(i).id){
+                minId = listaJog.get(i).id;
+            }
+
+        }
 
         for(int i = 0; i < listaJog.size();i++){
             if(listaJog.get(i).energia == 0){
                 energia++;
             }
+            if(maxPos == listaJog.get(i).pos){
+                numJog++;
+            }
         }
 
 
-        if(energia == listaJog.size()){
+        if(energia == listaJog.size()) {
 
-            switch (energia){
-                case 2:
-                    if(listaJog.get(0).pos != listaJog.get(1).pos) {
-
-                        if (listaJog.get(0).pos > listaJog.get(1).pos) {
-                            idJogador = listaJog.get(0).id;
-                        } else {
-                            idJogador = listaJog.get(1).id;
+            for(int i = 0; i < listaJog.size();i++){
+                if(maxPos == listaJog.get(i).pos){
+                    if(numJog > 1){
+                        if(minId == listaJog.get(i).id){
+                            jogador1 = minId;
                         }
                     }else{
-                        if(listaJog.get(0).id < listaJog.get(1).id){
-                            idJogador = listaJog.get(0).id;
-                        }else{
-                            idJogador = listaJog.get(1).id;
-                        }
+                        jogador1 = listaJog.get(i).id;
                     }
-                break;
-
-                case 3:
-
-                    if(listaJog.get(0).pos != listaJog.get(1).pos || listaJog.get(0).pos != listaJog.get(2).pos || listaJog.get(1).pos != listaJog.get(2).pos) {
-
-                        if (listaJog.get(0).pos > listaJog.get(1).pos && listaJog.get(0).pos > listaJog.get(2).pos) {
-                            idJogador = listaJog.get(0).id;
-
-                        } else if (listaJog.get(1).pos > listaJog.get(0).pos && listaJog.get(1).pos > listaJog.get(2).pos) {
-                            idJogador = listaJog.get(1).id;
-
-                        } else {
-                            idJogador = listaJog.get(2).id;
-                        }
-                    }else{
-
-                        if (listaJog.get(0).id < listaJog.get(1).id && listaJog.get(0).id < listaJog.get(2).id) {
-                            idJogador = listaJog.get(0).id;
-
-                        } else if (listaJog.get(1).id < listaJog.get(0).id && listaJog.get(1).id < listaJog.get(2).id) {
-                            idJogador = listaJog.get(1).id;
-
-                        } else {
-                            idJogador = listaJog.get(2).id;
-                        }
-                    }
-                break;
-
-                case 4:
-
-                    if(listaJog.get(0).pos != listaJog.get(1).pos || listaJog.get(0).pos != listaJog.get(2).pos || listaJog.get(0).pos != listaJog.get(3).pos ||
-                            listaJog.get(1).pos != listaJog.get(2).pos || listaJog.get(1).pos != listaJog.get(3).pos || listaJog.get(2).pos != listaJog.get(3).pos) {
-
-                        if (listaJog.get(0).pos > listaJog.get(1).pos && listaJog.get(0).pos > listaJog.get(2).pos && listaJog.get(0).pos > listaJog.get(3).pos) {
-                            idJogador = listaJog.get(0).id;
-
-                        } else if (listaJog.get(1).pos > listaJog.get(0).pos && listaJog.get(1).pos > listaJog.get(2).pos && listaJog.get(1).pos > listaJog.get(3).pos) {
-                            idJogador = listaJog.get(1).id;
-
-                        } else if (listaJog.get(2).pos > listaJog.get(0).pos && listaJog.get(2).pos > listaJog.get(1).pos && listaJog.get(2).pos > listaJog.get(3).pos) {
-                            idJogador = listaJog.get(2).id;
-
-                        } else {
-                            idJogador = listaJog.get(3).id;
-                        }
-                    }else{
-
-                        if (listaJog.get(0).id < listaJog.get(1).id && listaJog.get(0).id < listaJog.get(2).id && listaJog.get(0).id < listaJog.get(3).id) {
-                            idJogador = listaJog.get(0).id;
-
-                        } else if (listaJog.get(1).id < listaJog.get(0).id && listaJog.get(1).id < listaJog.get(2).id && listaJog.get(1).id < listaJog.get(3).id) {
-                            idJogador = listaJog.get(1).id;
-
-                        } else if (listaJog.get(2).id < listaJog.get(0).id && listaJog.get(2).id < listaJog.get(1).id && listaJog.get(2).id < listaJog.get(3).id) {
-                            idJogador = listaJog.get(2).id;
-
-                        } else {
-                            idJogador = listaJog.get(3).id;
-                        }
-                    }
-            }
-
-            for(int i = 0; i < listaJog.size(); i++){
-                if(idJogador == listaJog.get(i).id){
-                    winner[0] = String.valueOf(listaJog.get(i).id);
-                    winner[1] = listaJog.get(i).nome;
-                    winner[2] = listaJog.get(i).especie;
-                    winner[3] = String.valueOf(listaJog.get(i).pos);
-
-                    return winner;
                 }
             }
-        }
 
+            for(int i = 0; i < listaJog.size();i++){
 
-        for(int i = 0; i < listaJog.size(); i++){
-            if(listaJog.get(i).pos == tamanhoTabuleiro){
-                winner[0] = String.valueOf(listaJog.get(i).id);
-                winner[1] = listaJog.get(i).nome;
-                winner[2] = listaJog.get(i).especie;
-                winner[3] = String.valueOf(listaJog.get(i).pos);
+                if(listaJog.get(i).id == jogador1){
+                        winner1[0] = String.valueOf(listaJog.get(i).id);
+                        winner1[1] = listaJog.get(i).nome;
+                        winner1[2] = listaJog.get(i).especie;
+                        winner1[3] = String.valueOf(listaJog.get(i).pos);
+                        return winner1;
+                }
 
-                return winner;
             }
+
         }
-            return null;
+
+        for(int i = 0; i < listaJog.size();i++){
+
+            if(listaJog.get(i).pos == tamanhoTabuleiro){
+                winner1[0] = String.valueOf(listaJog.get(i).id);
+                winner1[1] = listaJog.get(i).nome;
+                winner1[2] = listaJog.get(i).especie;
+                winner1[3] = String.valueOf(listaJog.get(i).pos);
+                return winner1;
+            }
+
         }
+        return null;
+    }
 
 
 
